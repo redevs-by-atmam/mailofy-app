@@ -29,7 +29,8 @@ jobs:
 
 
       - name: Build Flutter web
-        run: flutter build web --release
+        run: flutter build web --release --base-href=/mailofly-app/
+
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

@@ -43,6 +43,5 @@ jobs:
           tag_name: "${{ env.SHORT_SHA }}"
           body: "Automated release for commit ${{ env.SHORT_SHA }}"
           files: build/app/outputs/flutter-apk/app-release.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GHUB_TOKEN }}
+          token: ${{ secrets.GHUB_TOKEN }}
 

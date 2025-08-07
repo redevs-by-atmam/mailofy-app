@@ -1,0 +1,41 @@
+name: Build and Release Flutter APK
+
+on:
+  push:
+    branches:
+      - main  # Triggers only on push to main
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0'
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Get short commit SHA
+        id: vars
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Create release and upload APK
+        uses: softprops/action-gh-release@v1
+        with:
+          name: "Release ${{ env.SHORT_SHA }}"
+          tag_name: "${{ env.SHORT_SHA }}"
+          body: "Automated release for commit ${{ env.SHORT_SHA }}"
+          files: build/app/outputs/flutter-apk/app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mailofly_android/screens/profile.dart';
+import 'package:mailofly_android/services/api_service.dart';
+import 'package:mailofly_android/services/template_service.dart';
+import 'package:mailofly_android/services/user_service.dart';
+import 'package:mailofly_android/supabase/types/functions/user_profile_details.dart';
+import 'package:mailofly_android/supabase/types/tables/_tables.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Home extends StatefulWidget {
@@ -10,20 +15,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _selectedIndex = 0;
+  late UserProfileDetails user;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
+  @override
+  void initState() {
+    Future.microtask(() async {
+      final api = ApiClient();
+      final userService = UserService(api);
+      final response = await userService.getUserDetails();
+      if (response.success) user = response.data!;
     });
-
-    if (index == 1) {
-      // Navigate to ProfilePage
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const ProfilePage()),
-      );
-    }
+    super.initState();
   }
 
   @override
@@ -33,7 +35,7 @@ class _HomeState extends State<Home> {
     final email = session?.user.email ?? 'Unknown';
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Mailofly Dashboard')),
+      appBar: AppBar(title: const Text('Mailofly')),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -72,14 +74,6 @@ class _HomeState extends State<Home> {
             style: const TextStyle(fontSize: 14),
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
       ),
     );
   }

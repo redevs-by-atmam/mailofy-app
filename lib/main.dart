@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mailofly_android/auth_gate.dart';
+import 'package:mailofly_android/providers/user_profile_provider.dart';
+import 'package:mailofly_android/services/api_service.dart';
+import 'package:mailofly_android/services/user_service.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_auth_ui/supabase_auth_ui.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -25,9 +29,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: AuthGate(),
+    return ChangeNotifierProvider(
+      create: (context) {
+        final api = ApiClient();
+        final userService = UserService(api);
+        return UserProfileProvider(api, userService);
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const AuthGate(),
+      ),
     );
   }
 }

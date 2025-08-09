@@ -13,7 +13,6 @@ class ApiClient {
   ApiClient() {
     dio.options.baseUrl = 'https://www.mailofly.com/api';
     dio.interceptors.add(PrettyDioLogger(requestHeader: true));
-    print(dio.options.headers);
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
@@ -37,7 +36,7 @@ class ApiClient {
 extension ApiClientExtensions on ApiClient {
   Future<ApiResponse<T>> getParsed<T>(
     String path, {
-    required T Function(Map<String, dynamic>? json) fromJsonT,
+    required T Function(Object? json) fromJsonT,
     Map<String, dynamic>? queryParams,
   }) async {
     try {
@@ -65,7 +64,7 @@ extension ApiClientExtensions on ApiClient {
 
   Future<ApiResponse<List<T>>> getParsedList<T>(
     String path, {
-    required T Function(Map<String, dynamic> json) fromJsonT,
+    required T Function(Object json) fromJsonT,
     Map<String, dynamic>? queryParams,
   }) async {
     try {

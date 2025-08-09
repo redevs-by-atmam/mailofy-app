@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mailofly_android/screens/profile.dart';
+import 'package:mailofly_android/screens/templates.dart';
 import 'package:mailofly_android/services/api_service.dart';
 import 'package:mailofly_android/services/template_service.dart';
 import 'package:mailofly_android/services/user_service.dart';
@@ -60,6 +61,17 @@ class _HomeState extends State<Home> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const ProfilePage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('templates'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const TemplatesPage()),
                 );
               },
             ),

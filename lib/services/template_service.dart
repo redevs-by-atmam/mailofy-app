@@ -6,11 +6,17 @@ class TemplateService {
   final ApiClient apiClient;
   const TemplateService(this.apiClient);
 
-  Future<ApiResponse<List<TemplatesRow>>> getTemplates() {
-    return apiClient.getParsedList<TemplatesRow>(
-      '/templates',
-      fromJsonT: (json) => TemplatesRow.fromJson(json),
+  Future<ApiResponse<List<TemplatesRow>>> getTemplates() async {
+    final response = await apiClient.dio.get('/templates');
+    final apiResponse = ApiResponse<List<TemplatesRow>>(
+      success: response.data['success'],
+      data:
+          (response.data['data'] as List)
+              .map((v) => TemplatesRow.fromJson(v))
+              .toList(),
+      error: response.data['error'] != null ? ApiError.fromJson(response.data['error']) : null,
     );
+    return apiResponse;
   }
 
   Future<ApiResponse<TemplatesRow>> getTemplate(String id) {

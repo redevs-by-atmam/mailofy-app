@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
             DrawerHeader(
               decoration: const BoxDecoration(color: Colors.blue),
               child: Text(
-                'Hello, $email',
+                'HelloW, $email',
                 style: const TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),

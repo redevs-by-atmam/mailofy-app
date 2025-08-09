@@ -105,8 +105,4 @@ class UserProfileProvider extends ChangeNotifier {
   /// Get current plan name
   String? get currentPlanName => _userProfile?.plan?.name;
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

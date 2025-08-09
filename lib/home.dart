@@ -6,6 +6,8 @@ import 'package:mailofly_android/services/user_service.dart';
 import 'package:mailofly_android/supabase/types/functions/user_profile_details.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+
+// New Comments added
 class Home extends StatefulWidget {
   const Home({super.key});
 

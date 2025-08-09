@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mailofly_android/screens/profile.dart';
 import 'package:mailofly_android/screens/templates.dart';
 import 'package:mailofly_android/services/api_service.dart';
-import 'package:mailofly_android/services/template_service.dart';
 import 'package:mailofly_android/services/user_service.dart';
 import 'package:mailofly_android/supabase/types/functions/user_profile_details.dart';
-import 'package:mailofly_android/supabase/types/tables/_tables.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class Home extends StatefulWidget {

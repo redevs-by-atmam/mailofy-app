@@ -38,10 +38,11 @@ dependencies:
   supabase_auth_ui: ^0.5.5
   flutter_dotenv: ^5.2.1
   supabase_codegen: ^1.4.0
-  provider: ^6.1.2
+  provider: ^6.1.5
   dio: ^5.9.0
   pretty_dio_logger: ^1.4.0
   intl: ^0.20.2
+  http: ^1.5.0
 
 dev_dependencies:
   flutter_test:

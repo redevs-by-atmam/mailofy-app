@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../supabase/types/tables/templates.dart';
+import '../../supabase/types/tables/templates.dart';
 
 class TemplateCard extends StatelessWidget {
   final TemplatesRow template;
 
-  const TemplateCard({
-    super.key,
-    required this.template,
-  });
+  const TemplateCard({super.key, required this.template});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +14,7 @@ class TemplateCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       elevation: 2,
       child: InkWell(
-        onTap: () {
-          // TODO: Navigate to template detail page
-        },
+        onTap: () {},
         borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -34,18 +29,17 @@ class TemplateCard extends StatelessWidget {
                     child: Text(
                       'Unknown User',
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   Text(
                     template.createdAt != null
                         ? dateFormat.format(template.createdAt!)
                         : '',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(color: Colors.grey[600]),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
                   ),
                 ],
               ),
@@ -63,10 +57,9 @@ class TemplateCard extends StatelessWidget {
                   template.description!,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(color: Colors.grey[700]),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: Colors.grey[700]),
                 ),
               ],
 
@@ -75,14 +68,12 @@ class TemplateCard extends StatelessWidget {
               // Category + use case
               Row(
                 children: [
-                  
                   if (template.useCase != null)
                     Text(
                       template.useCase.toString().split('.').last,
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelMedium
-                          ?.copyWith(color: Colors.grey[600]),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: Colors.grey[600],
+                      ),
                     ),
                 ],
               ),

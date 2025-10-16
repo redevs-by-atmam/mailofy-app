@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mailofly_android/services/api_service.dart';
-import 'package:mailofly_android/services/user_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../supabase/types/functions/user_profile_details.dart';
+import '../../supabase/types/functions/user_profile_details.dart';
 
 enum UserProfileState { initial, loading, loaded, error }
 
 class UserProfileProvider extends ChangeNotifier {
-  final ApiClient ap;
-  final UserService userService;
   final SupabaseClient _supabase = Supabase.instance.client;
 
   UserProfileDetails? _userProfile;
@@ -24,7 +20,7 @@ class UserProfileProvider extends ChangeNotifier {
   bool get isLoaded => _state == UserProfileState.loaded;
   bool get hasUserProfile => _userProfile != null;
 
-  UserProfileProvider(this.ap, this.userService) {
+  UserProfileProvider() {
     _initializeAuthListener();
   }
 
@@ -105,8 +101,4 @@ class UserProfileProvider extends ChangeNotifier {
   /// Get current plan name
   String? get currentPlanName => _userProfile?.plan?.name;
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

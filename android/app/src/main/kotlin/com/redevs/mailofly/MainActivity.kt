@@ -1,4 +1,4 @@
-package com.example.mailofly_android
+package com.redevs.mailofly
 
 import io.flutter.embedding.android.FlutterActivity
 
